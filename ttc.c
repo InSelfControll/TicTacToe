@@ -36,8 +36,6 @@ main (void){
 	printBoard(g);
   do{
 		printf("\nHit x or o or 'q' for quit. \n");
-	//	printf("\nHello Sir.");
-
 		scanf("%c",&g.input);
 
 		if(g.input == 'x' || g.input == 'o'){
