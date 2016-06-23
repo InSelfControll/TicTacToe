@@ -31,10 +31,13 @@ void GameOver(TTTGame *g){
 }
 main (void){
 	TTTGame g;
+
 	initateBoard(&g);
 	printBoard(g);
   do{
 		printf("\nHit x or o or 'q' for quit. \n");
+		printf("\nHello Sir.");
+		
 		scanf("%c",&g.input);
 
 		if(g.input == 'x' || g.input == 'o'){
@@ -42,6 +45,7 @@ main (void){
 			scanf("%d",&g.selectRows);
 
 			printf("\n\nChoose 1 - 3 for colums:  ");
+
 			scanf("%d",&g.selectColums);
 			g.board[g.selectRows -1 ][g.selectColums -1] = g.input;
 		}
