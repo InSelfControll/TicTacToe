@@ -5,15 +5,9 @@
 #include <stdbool.h>
 
 typedef struct{
-	char board[3][3] , input;
+	char board[3][3] , player;
 	int selectRows , selectColums,GameOver,rows , colums,size;
-	// int rows , colums;
 }TTTGame;
-//
-// typedef enum{
-//
-// }player;
-
 typedef struct{
 	int x , y;
 }Pos;
@@ -23,7 +17,6 @@ void printBoard(TTTGame g){
 		for (g.colums = 0 ; g.colums < 3 ; g.colums++) {
 			printf("%c|",g.board[g.rows][g.colums]);
 		}
-//		printf("%c",g.board[g.rows][2]);
 		if(g.rows < 2)
 			printf("\n------\n");
 		else
@@ -38,33 +31,21 @@ void initateBoard(TTTGame *g){
 		}
 	}
 }
-void GameOver(TTTGame *g){
-
-}
-// Player move(TTTGame g, Position *lastMove, Player player){
-// 	g.board[lastMove->y][lastMove->x] = player;
-//   g.rowScores[lastMove->y] += player;
-//   g.colScores[lastMove->x] += player;
-//
-//   if (lastMove->y == lastMove->x) {
-//     g.topLeftBottomRightDiagonalScores += player;
-//   }
-//
-//   if (lastMove->x == game->size - lastMove->x) {
-//     g.topRightBottomLeftDiagonalScores += player;
-//   }
-//
-//   return checkForWinner(g, lastMove);
-// }
-
+	void GameOver(TTTGame *g){
+			// if(g->board[g->selectRows - 1][g->selectColums - 1] == g->player){
+			// 	// g.selectRows = choosePlace()
+			// 	printf("\nYou won.",g->player);
+			// }else{
+			// 	printf("\nYou lose.");
+			// }
+	}
 int choosePlace(char* sE){
 	int input;
-	//char desc[] = "";
 	printf("\n\nChoose 1 - 3 for %s: ",sE);
 
 	scanf("%d",&input);
 	while(0 >= input || input > 3 ) {
-		printf("\n Can't accessable." );
+		printf("\n The operation is not permitable." );
 		printf("\n\nChoose 1 - 3 for %s: ",sE);
 		scanf("%d",&input);
 	}
@@ -75,18 +56,29 @@ main (void){
 	TTTGame g;
 	initateBoard(&g);
 	printBoard(g);
+	int input;
+	g.player = 'x';
   do{
-		printf("\nHit x or o or 'q' for quit. \n");
-		scanf("%c",&g.input);
+		printf("\n%c turn. \n",g.player);
 
-		if(g.input == 'x' || g.input == 'o'){
+		g.selectRows = choosePlace("rows");
+		g.selectColums = choosePlace("coloms");
 
+//if place taken, goto "here!"
+		while(g.board[g.selectRows - 1][g.selectColums - 1] != ' '){
+			printf("\nPlease choose a different place.");
 			g.selectRows = choosePlace("rows");
 			g.selectColums = choosePlace("coloms");
+		}
 
-			g.board[g.selectRows -1 ][g.selectColums -1] = g.input;
+		g.board[g.selectRows -1 ][g.selectColums -1] = g.player;
+
+		if(g.player == 'x'){
+				g.player = 'o';
+		}else{
+			g.player = 'x';
 		}
 		printBoard(g);
-	}while(g.input != 'q');
+	}while(1);
 getch();
 }
