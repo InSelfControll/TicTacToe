@@ -32,12 +32,11 @@ void initateBoard(TTTGame *g){
 	}
 }
 	void GameOver(TTTGame *g){
-			// if(g->board[g->selectRows - 1][g->selectColums - 1] == g->player){
-			// 	// g.selectRows = choosePlace()
-			// 	printf("\nYou won.",g->player);
-			// }else{
-			// 	printf("\nYou lose.");
-			// }
+		for(g->rows = 0 ; g->rows < 3 ; g->rows++) {
+			for (g->colums = 0 ; g->colums < 3 ; g->colums++) {
+				g->board[g->rows][g->colums] = ' ';
+			}
+		}
 	}
 int choosePlace(char* sE){
 	int input;
@@ -56,6 +55,7 @@ main (void){
 	TTTGame g;
 	initateBoard(&g);
 	printBoard(g);
+	// GameOver(&g);
 	int input;
 	g.player = 'x';
   do{
